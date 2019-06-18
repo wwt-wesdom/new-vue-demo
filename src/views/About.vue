@@ -15,7 +15,7 @@
         <div>{{slotProps.user.firstName}}</div>
       </template>
       <template v-slot:lastName="{user}">
-        <div>{{user.lastName}}</div>
+        <div>{{user.firstName}}</div>
       </template>
     </custom-slot>
   </div>
