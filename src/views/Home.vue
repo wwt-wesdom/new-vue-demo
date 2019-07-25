@@ -1,7 +1,5 @@
 <template xmlns="http://www.w3.org/1999/html">
   <div class="home">
-    <img alt="Vue logo" src="../assets/img/common/logo.png">
-    <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
     <div>count:{{count}}</div>
     <div>time:{{time}}</div>
     <div>{{doneToDos(false)}}</div>
@@ -11,6 +9,10 @@
       <input type="text" v-model="text" />
     </label>
     <RefUsr ref="childComponent" :text="text"></RefUsr>
+    <div>
+      <router-link to="/toggle-switch">ToggleSwitch</router-link>
+      <router-link to="/container">Container</router-link>
+    </div>
   </div>
 </template>
 
@@ -47,7 +49,6 @@ export default {
     ])
   },
   mounted() {
-    console.log(this);
   },
   methods: {
     changeState() {

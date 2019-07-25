@@ -8,7 +8,9 @@
     <todo-list :todos="todos">
       <template v-slot:todo="{ todo }">
         <span v-if="todo.isComplete">✓</span>
-        {{ todo.text }}
+        <span @click="todo.isComplete = true">
+           {{ todo.text }}
+        </span>
       </template>
     </todo-list>
   </div>
@@ -41,6 +43,14 @@
           }
         ]
       }
+    },
+    watch: {
+      '$route'(to, from) {
+        console.log(111);
+        console.log(from);
+        console.log(to);
+      },
+      deep: true
     }
   }
 </script>

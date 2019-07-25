@@ -6,9 +6,6 @@
         <button @click="close">close</button>
       </div>
     </van-popup>
-    <button @click="model = !model">
-      open
-    </button>
   </div>
 </template>
 
