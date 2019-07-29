@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   mode: 'history',
@@ -13,7 +13,10 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {
+        showTabbar: true
+      }
     },
     {
       path: '/about',
@@ -22,21 +25,49 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+      meta: {
+        showTabbar: true
+      }
     },
     {
       path: '/text-page',
       name: 'textPage',
-      component: () => import(/* webpackChunkName: "about" */ './views/TextPage.vue')
+      component: () => import(/* webpackChunkName: "about" */ './views/TextPage.vue'),
+      meta: {
+        showTabbar: true
+      }
     },
     {
       path: '/toggle-switch',
       name: 'toggleSwitch',
       component: () => import(/* webpackChunkName: "about" */ './views/ToggleSwitch.vue'),
+      meta: {
+        showTabbar: true
+      }
     },
     {
       path: '/container',
       name: 'container',
       component: () => import(/* webpackChunkName: "about" */ './views/Container.vue'),
+      meta: {
+        showTabbar: true
+      }
+    },
+    {
+      path: '/bfc',
+      name: 'bfc',
+      component: () => import(/* webpackChunkName: "about" */ './views/BlockFormattingContext.vue'),
+      meta: {
+        showTabbar: true
+      }
+    },
+    {
+      path: '/user-info',
+      name: 'userInfo',
+      component: () => import(/* webpackChunkName: "about" */ './views/UserInfo.vue'),
+      meta: {
+        showTabbar: true
+      }
     }
   ]
 })

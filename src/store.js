@@ -10,7 +10,8 @@ export default new Vuex.Store({
     toDos: [
       { id: 1, text: 'one', done: true },
       { id: 2, text: 'two', done: false }
-    ]
+    ],
+    showTabbar: true,
   },
   getters: {
     doneToDos: state => (done) => {
@@ -20,9 +21,12 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    increment(state){
+    increment(state) {
       state.count ++;
       state.time = new Date().getTime()
+    },
+    showTabbar(state, value) {
+      state.showTabbar = value;
     }
   },
   actions: {
