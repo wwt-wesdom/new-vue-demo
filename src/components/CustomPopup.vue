@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-popup v-bind:value="value" @click-overlay="close">
-      <div>
+      <div class="border-radius-5 bc-fff">
         <p>奥古斯都楼上的房间爱上了看到</p>
         <button @click="close">close</button>
       </div>
@@ -24,7 +24,6 @@
     },
     methods: {
       close() {
-        console.log(111111);
         this.$emit('input', false)
       }
     }

@@ -29,4 +29,9 @@ html *{
   margin: 0;
   padding: 0;
 }
+.van-tabbar--fixed {
+  max-width: 600px;
+  left: 50%;
+  transform: translateX(-50%);
+}
 </style>

@@ -20,6 +20,7 @@
         <router-link to="/bfc">BFC</router-link>
       </section>
     </div>
+    <CustomButton text="login" size="small" to="/login"/>
   </div>
 </template>
 
@@ -27,17 +28,20 @@
   // @ is an alias to /src
   import HelloWorld from '@/components/HelloWorld.vue';
   import RefUsr from '@/components/RefUser.vue';
-  import { mapState, mapGetters } from  'vuex';
+  import CustomButton from '@/components/CustomButton.vue';
+  import { mapState, mapGetters } from  'vuex'
 
   export default {
     name: 'userInfo',
     components: {
       HelloWorld,
       RefUsr,
+      CustomButton,
     },
     data() {
       return {
-        text: "august"
+        text: "august",
+        loading: false,
       }
     },
     created() {
@@ -63,6 +67,13 @@
         console.log(this.$refs.childComponent.value);
         this.$refs.childComponent.getLocalData();
         this.$store.commit('increment')
+      },
+      callback() {
+        this.loading = true;
+        console.log(this.loading);
+        setTimeout(() => {
+          this.loading = false;
+        }, 2000)
       }
     }
   }

@@ -15,7 +15,8 @@ export default new Router({
       name: 'home',
       component: Home,
       meta: {
-        showTabbar: true
+        showTabbar: true,
+        login: false,
       }
     },
     {
@@ -26,7 +27,8 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
       meta: {
-        showTabbar: true
+        showTabbar: true,
+        login: false,
       }
     },
     {
@@ -34,7 +36,8 @@ export default new Router({
       name: 'textPage',
       component: () => import(/* webpackChunkName: "about" */ './views/TextPage.vue'),
       meta: {
-        showTabbar: true
+        showTabbar: true,
+        login: false,
       }
     },
     {
@@ -42,7 +45,8 @@ export default new Router({
       name: 'toggleSwitch',
       component: () => import(/* webpackChunkName: "about" */ './views/ToggleSwitch.vue'),
       meta: {
-        showTabbar: true
+        showTabbar: true,
+        login: false,
       }
     },
     {
@@ -50,7 +54,8 @@ export default new Router({
       name: 'container',
       component: () => import(/* webpackChunkName: "about" */ './views/Container.vue'),
       meta: {
-        showTabbar: true
+        showTabbar: true,
+        login: false,
       }
     },
     {
@@ -58,7 +63,8 @@ export default new Router({
       name: 'bfc',
       component: () => import(/* webpackChunkName: "about" */ './views/BlockFormattingContext.vue'),
       meta: {
-        showTabbar: true
+        showTabbar: true,
+        login: false,
       }
     },
     {
@@ -66,7 +72,17 @@ export default new Router({
       name: 'userInfo',
       component: () => import(/* webpackChunkName: "about" */ './views/UserInfo.vue'),
       meta: {
-        showTabbar: true
+        showTabbar: true,
+        login: true,
+      }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import(/* webpackChunkName: "about" */ './views/Login.vue'),
+      meta: {
+        showTabbar: false,
+        login: false,
       }
     }
   ]

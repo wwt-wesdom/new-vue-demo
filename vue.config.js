@@ -8,6 +8,16 @@ const resolve = dir => {
 module.exports = {
   publicPath: "./",
   productionSourceMap: false,
+  css: {
+    sourceMap: false,
+    loaderOptions: {
+      less: {
+        modifyVars: {
+          "popup-background-color": "transparent"
+        }
+      }
+    }
+  },
   chainWebpack: config => {
     config.plugins.delete("prefetch");
     config.resolve.alias
