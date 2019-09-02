@@ -1,12 +1,12 @@
 <template>
   <div>
-
+    combination
   </div>
 </template>
 
 <script>
   export default {
-    name: "BlockFormattingContext"
+    name: "Combination"
   }
 </script>
 

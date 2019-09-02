@@ -19,6 +19,9 @@
       <section>
         <router-link to="/bfc">BFC</router-link>
       </section>
+      <section>
+        <router-link to="/about">about</router-link>
+      </section>
     </div>
     <CustomButton text="login" size="small" to="/login"/>
   </div>

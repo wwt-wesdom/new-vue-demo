@@ -3,7 +3,7 @@
     <h1>This is an about page</h1>
     <custom-input v-model="searchText"></custom-input>
     <button @click="changePopup"> toggle </button>
-    <custom-popup v-model="value"></custom-popup>
+    <custom-popup @hook:mounted="doSomething" v-model="value"></custom-popup>
     <custom-slot>
       <template v-slot:title>
         <span>error</span>
@@ -40,6 +40,9 @@
     methods: {
       changePopup() {
         this.value = !this.value;
+      },
+      doSomething() {
+        console.log("子组件:mounted");
       }
     }
   }

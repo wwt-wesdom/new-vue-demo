@@ -104,7 +104,6 @@
       asyncFun() {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
-            resolve(222222);
           })
         })
       }
@@ -116,7 +115,7 @@
   .grid {
     position: absolute;
     width: 100%;
-    left: -1000px;
+    left: 0;
     display: grid;
     grid-template-columns: 33.33% 33.33% 33.33%;
     text-align: center;

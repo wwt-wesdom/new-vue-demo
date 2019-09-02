@@ -16,7 +16,7 @@ export default new Router({
       component: Home,
       meta: {
         showTabbar: true,
-        login: false,
+        needLogin: false,
       }
     },
     {
@@ -28,7 +28,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
       meta: {
         showTabbar: true,
-        login: false,
+        needLogin: false,
       }
     },
     {
@@ -37,7 +37,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/TextPage.vue'),
       meta: {
         showTabbar: true,
-        login: false,
+        needLogin: false,
       }
     },
     {
@@ -46,7 +46,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/ToggleSwitch.vue'),
       meta: {
         showTabbar: true,
-        login: false,
+        needLogin: false,
       }
     },
     {
@@ -55,16 +55,16 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/Container.vue'),
       meta: {
         showTabbar: true,
-        login: false,
+        needLogin: false,
       }
     },
     {
       path: '/bfc',
       name: 'bfc',
-      component: () => import(/* webpackChunkName: "about" */ './views/BlockFormattingContext.vue'),
+      component: () => import(/* webpackChunkName: "about" */ './views/BFC.vue'),
       meta: {
         showTabbar: true,
-        login: false,
+        needLogin: false,
       }
     },
     {
@@ -73,7 +73,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/UserInfo.vue'),
       meta: {
         showTabbar: true,
-        login: true,
+        needLogin: true,
       }
     },
     {
@@ -82,7 +82,16 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/Login.vue'),
       meta: {
         showTabbar: false,
-        login: false,
+        needLogin: false,
+      }
+    },
+    {
+      path: '/combination',
+      name: 'combination',
+      component: () => import(/* webpackChunkName: "about" */ './views/Combination.vue'),
+      meta: {
+        showTabbar: false,
+        needLogin: true,
       }
     }
   ]
