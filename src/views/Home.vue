@@ -153,6 +153,14 @@
         const reader = new FileReader();
         reader.onload = function (e) {
           const result = e.target.result;
+          const image = new Image();
+          image.onload = function() {
+            let width = image.width;
+            let height = image.height;
+            console.log(width);
+            console.log(height);
+          };
+          image.src= result;
           // compress(result,false)
           that.imageSrc = result;
         };
