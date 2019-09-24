@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import "@/scss/common.scss";
 import { getStorage } from "@/config/utils";
+import "lib-flexible/flexible"
 // import Vuex from 'vuex'
 
 Vue.config.productionTip = false;

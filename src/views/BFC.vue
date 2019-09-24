@@ -7,6 +7,7 @@
         {{item}}
       </p>
     </div>
+    <CustomButton text="微信登录" size="large" :callback="wechatLogin"/>
   </div>
 </template>
 
@@ -138,10 +139,16 @@
             val = v;
           }
         })
+      },
+      wechatLogin() {
+        var path = 'http://www.xxxx.com';//登录后回调的地址
+        let appid = '1123456';//注册申请的appid
+        window.open('https://open.weixin.qq.com/connect/qrconnect?appid='+appid+'&redirect_uri=path&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect');
       }
     }
   }
 </script>
+
 
 <style scoped>
 

@@ -15,7 +15,7 @@
       <div class="right">3</div>
       <div class="center">
         2float
-        <p>float布局</p>
+        <p style="text-align: left">float布局</p>
         <p>float布局</p>
         <p>float布局</p>
       </div>
@@ -35,7 +35,29 @@
 
 <script>
   export default {
-    name: "Container"
+    name: "Container",
+    data() {
+      return {
+        arr: []
+      }
+    },
+    created() {
+      this.getArr();
+    },
+    methods: {
+      getArr() {
+        let arr = [];
+        function addArr() {
+          let num = Math.floor( Math.random()*30 + 2);
+          if (arr.length < 5 && !arr.find(item=>item === num)) {
+            arr.push(num);
+            addArr();
+          }
+          return arr;
+        }
+        addArr();
+      }
+    }
   }
 </script>
 

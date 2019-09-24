@@ -12,6 +12,7 @@
       </div>
     </section>
     <button @click="toImageFun">生成图片</button>
+    <div @click="excelFun">导出excel</div>
     <section>
       <img :src="dateUrl" alt="" width="50">
     </section>
@@ -26,6 +27,11 @@
     <div class="text-center">
       <span class="inline-block tao" ref="canvasDom">涛</span>
     </div>
+    <input class="display-none" type="file" @change="uploadImg" id="uploadImg" name="image" accept="image/*">
+    <label class="uploader-btn" for="uploadImg">上传图片</label>
+    <img width="100%" :src="imageSrc" alt="">
+    <img width="100%" src="~assets/img/common/dlrb.jpg" alt="">
+    <img width="100%" :src=" dlrbImg" alt="">
   </div>
 </template>
 
@@ -33,7 +39,9 @@
   // @ is an alias to /src
   import {Swipe, SwipeItem} from 'vant';
   import html2canvas from 'html2canvas';
-  import Canvas2image from 'canvas2image';
+  import _csv from '@/csv/csv';
+  import _exportCsv from '@/csv/export-csv';
+  import { timeToDate } from "@/config/utils"
 
   export default {
     name: 'home',
@@ -49,16 +57,44 @@
         ],
         gridList: [],
         dateUrl: null,
+        imageSrc: null,
+        dlrbImg: "images/dlrb.jpg",
+        excelJson: [
+          {
+            "提交订单号时间": "one",
+            "订单号": "64546465",
+            "旺旺号": "ssdfjasld"
+          },
+          {
+            "提交订单号时间": "one",
+            "订单号": "64546465",
+            "旺旺号": "ssdfjasld"
+          },
+          {
+            "提交订单号时间": "one",
+            "订单号": "64546465",
+            "旺旺号": "ssdfjasld"
+          }
+        ]
       }
+    },
+    beforeCreate() {
+      this.baseUrl = process.env.BASE_URL;
     },
     created() {
       this.setGridList(9);
       this.asyncFun().then(res => {
-        console.log(res);
-      })
+        // console.log(res);
+      });
     },
-    computed: {},
+    computed: {
+      getNumber() {
+        return 100;
+      }
+    },
     mounted() {
+      window.onscroll = () => {
+      }
     },
     methods: {
       setGridList(len = 8) {
@@ -97,14 +133,107 @@
           context.msImageSmoothingEnabled = false;
           context.imageSmoothingEnabled = false;
           this.dateUrl = canvas.toDataURL("image/png");
-          // let img = Canvas2image.convertToImage(canvas, canvas.width, canvas.height);
-          // console.log(Canvas2image.convertToImage());
         })
       },
       asyncFun() {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
           })
+        })
+      },
+      uploadImg(e) {
+        const that = this;
+        const imgFile = {};
+        const file = e.target.files[0];
+        if (!file) return;
+        imgFile.type = file.type || "image/jpeg";
+        imgFile.size = file.size;
+        imgFile.name = file.name;
+        imgFile.lastModifiedDate = file.lastModifiedDate;
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const result = e.target.result;
+          // compress(result,false)
+          that.imageSrc = result;
+        };
+        reader.readAsDataURL(file);
+        function compress (dataURL, shouldCompress = true) {
+          const img = new Image();
+
+          img.src = dataURL;
+
+          img.onload = function () {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            let compressedDataUrl;
+
+            if(shouldCompress){
+              compressedDataUrl = canvas.toDataURL(imgFile.type, 0.2);
+            } else {
+              compressedDataUrl = canvas.toDataURL(imgFile.type, 1);
+            }
+            that.imageSrc = compressedDataUrl;
+            // callback(compressedDataUrl);
+          }
+        }
+        function processData (dataURL) {
+          // 这里使用二进制方式处理dataUrl
+          const binaryString = window.atob(dataUrl.split(',')[1]);
+          const arrayBuffer = new ArrayBuffer(binaryString.length);
+          const intArray = new Uint8Array(arrayBuffer);
+          const imgFile = this.imgFile;
+
+          for (let i = 0, j = binaryString.length; i < j; i++) {
+            intArray[i] = binaryString.charCodeAt(i);
+          }
+
+          const data = [intArray];
+
+          let blob;
+
+          try {
+            blob = new Blob(data, { type: imgFile.type });
+          } catch (error) {
+            window.BlobBuilder = window.BlobBuilder ||
+                window.WebKitBlobBuilder ||
+                window.MozBlobBuilder ||
+                window.MSBlobBuilder;
+            if (error.name === 'TypeError' && window.BlobBuilder){
+              const builder = new BlobBuilder();
+              builder.append(arrayBuffer);
+              blob = builder.getBlob(imgFile.type);
+            } else {
+              // Toast.error("版本过低，不支持上传图片", 2000, undefined, false);
+              throw new Error('版本过低，不支持上传图片');
+            }
+          }
+
+          // blob 转file
+          const fileOfBlob = new File([blob], imgFile.name);
+          const formData = new FormData();
+
+          // type
+          formData.append('type', imgFile.type);
+          // size
+          formData.append('size', fileOfBlob.size);
+          // name
+          formData.append('name', imgFile.name);
+          // lastModifiedDate
+          formData.append('lastModifiedDate', imgFile.lastModifiedDate);
+          // append 文件
+          formData.append('file', fileOfBlob);
+        }
+      },
+      excelFun() {
+        const downloadData = _csv([{key: '提交订单号时间'}, {key: '订单号'}, {key: '旺旺号'}], this.excelJson);
+        _exportCsv.download(`${timeToDate()}.csv`, downloadData, () => {
+          console.log('批量导出订单成功！');
         })
       }
     }
@@ -113,9 +242,7 @@
 </script>
 <style scoped lang="scss">
   .grid {
-    position: absolute;
     width: 100%;
-    left: 0;
     display: grid;
     grid-template-columns: 33.33% 33.33% 33.33%;
     text-align: center;
@@ -123,9 +250,9 @@
     background-color: #fff;
 
     .grid-item {
-      border: 1px solid blue;
-      margin-top: -1px;
-      margin-left: -1px;
+      border: 1px solid blue; /*no*/
+      margin-top: -1px; /*no*/
+      margin-left: -1px; /*no*/
     }
 
     .grid-item:nth-of-type(3n+1) {
@@ -191,5 +318,16 @@
     border: 5px solid yellow;
     box-sizing: border-box;
     box-shadow: 0 0 10px #f00;
+  }
+  .uploader-btn {
+    display: inline-block;
+    width: 100px;
+    height: 38px;
+    border-radius: 4px;
+    background-color: red;
+    color: #fff;
+    margin: 10px 0;
+    line-height: 38px;
+
   }
 </style>

@@ -30,7 +30,7 @@ html *{
   padding: 0;
 }
 .van-tabbar--fixed {
-  max-width: 600px;
+  max-width: 600px; /*no*/
   left: 50%;
   transform: translateX(-50%);
 }
