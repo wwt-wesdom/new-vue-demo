@@ -1,18 +1,17 @@
 <template>
   <label>
-    <input v-bind:value="value" v-on:input="$emit('input', $event.target.value)" type="text"/>
+    <van-field v-bind:value="value" v-on:input="$emit('input', $event.target.value)" type="text"/>
   </label>
 </template>
 
 <script>
+  import { Field } from 'vant'
   export default {
     name: "CustomInput",
+    components: {
+      vanField: Field
+    },
     props: ['value'],
-    watch: {
-      value(n){
-        console.log(n);
-      }
-    }
   }
 </script>
 

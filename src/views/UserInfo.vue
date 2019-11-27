@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <div>count:{{count}}</div>
-    <div>time:{{time}}</div>
-    <div>{{doneToDos(false)}}</div>
+    <!--<div>count:{{count}}</div>-->
+    <!--<div>time:{{time}}</div>-->
+    <!--<div>{{doneToDos(false)}}</div>-->
     <button @click="changeState">state</button>
     <div></div>
     <label>
@@ -51,16 +51,16 @@
 
     },
     computed: {
-      ...mapState({
+      /*...mapState({
         count: state => state.count,
         time: state => state.time
-      }),
+      }),*/
       /*doneToDos() {
         return this.$store.getters.doneToDos(false);
       },*/
-      ...mapGetters([
+     /* ...mapGetters([
         'doneToDos'
-      ])
+      ])*/
     },
     mounted() {
     },

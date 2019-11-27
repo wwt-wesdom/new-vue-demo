@@ -13,6 +13,8 @@
     </section>
     <button @click="toImageFun">生成图片</button>
     <div @click="excelFun">导出excel</div>
+    <input type="checkbox" id="checkBox">
+    <label for="checkBox">label</label>
     <section>
       <img :src="dateUrl" alt="" width="50">
     </section>
@@ -30,8 +32,12 @@
     <input class="display-none" type="file" @change="uploadImg" id="uploadImg" name="image" accept="image/*">
     <label class="uploader-btn" for="uploadImg">上传图片</label>
     <img width="100%" :src="imageSrc" alt="">
-    <img width="100%" src="~assets/img/common/dlrb.jpg" alt="">
-    <img width="100%" :src=" dlrbImg" alt="">
+    <!--<img width="100%" src="~assets/img/common/dlrb.jpg" alt="">-->
+    <!--<img width="100%" :src=" dlrbImg" alt="">-->
+    <test-data></test-data>
+    <!--<div>{{ this.globalData }}</div>-->
+    <div @click="changeObjFun">{{objData.a}}</div>
+    <div>{{objData.b}}</div>
   </div>
 </template>
 
@@ -75,13 +81,20 @@
             "订单号": "64546465",
             "旺旺号": "ssdfjasld"
           }
-        ]
+        ],
+        objData: {
+          a: 'one'
+        },
+
       }
     },
     beforeCreate() {
-      this.baseUrl = process.env.BASE_URL;
+      this.baseUrl = process.env;
+      console.log(this.baseUrl);
     },
     created() {
+      console.log(this.$parent.showTabbar);
+      console.log(this.$children);
       this.setGridList(9);
       this.asyncFun().then(res => {
         // console.log(res);
@@ -97,6 +110,15 @@
       }
     },
     methods: {
+      changeObjFun() {
+        // 对象添加新属性
+        // this.objData.b = 'two'; // 视图不会刷新
+        // this.objData = Object.assign({}, this.objData, {b: 'two'}); // 视图刷新 （创建新对象｛｝）
+        // this.$set(this.objData, 'b', 'two'); // 使用$set视图刷新
+        const objDataTwo = Object.assign({}, this.objData, {b: 'two'}); // 直接源对象对象合并新对象，视图不会刷新
+        console.log(this.objData === objDataTwo); // false
+        console.log(this.objData);
+      },
       setGridList(len = 8) {
         for (let i = 0; i < len; i++) {
           this.gridList.push({
@@ -250,12 +272,12 @@
 </script>
 <style scoped lang="scss">
   .grid {
-    width: 100%;
     display: grid;
-    grid-template-columns: 33.33% 33.33% 33.33%;
-    text-align: center;
+    grid-template-columns: repeat(3, 1fr);
+    /*grid-template-rows: repeat(3, 33.33%);*/
+    /*text-align: center;*/
     overflow-x: scroll;
-    background-color: #fff;
+    /*background-color: #fff;*/
 
     .grid-item {
       border: 1px solid blue; /*no*/

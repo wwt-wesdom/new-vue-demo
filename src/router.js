@@ -93,6 +93,15 @@ export default new Router({
         showTabbar: false,
         needLogin: true,
       }
+    },
+    {
+      path: '/learn-ts',
+      name: 'learnTs',
+      component: () => import(/* webpackChunkName: "about" */ './views/LearnTs.vue'),
+      meta: {
+        showTabbar: false,
+        needLogin: false,
+      }
     }
   ]
 })

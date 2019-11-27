@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-button
-      :style="{backgroundColor: backgroundColor, color: color}"
+      :style="{backgroundColor: backgroundColor, color: color, width: width + 'px', height: height + 'px'}"
       :size="size"
       :loading="loading"
       loading-type="spinner"
@@ -44,13 +44,20 @@
       },
       callback: {
         default: () => {
-          console.log('点击了按钮');
         },
         type: Function
       },
       to: {
         default: '',
         type: String,
+      },
+      width: {
+        default: '200',
+        type: String
+      },
+      height: {
+        default: '40',
+        type: String
       }
     }
   }

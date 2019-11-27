@@ -12,7 +12,7 @@
     },
     computed: {
       showTabbar() {
-        return this.$store.state.showTabbar;
+        return this.$store.state.common.showTabbar;
       }
     }
   }

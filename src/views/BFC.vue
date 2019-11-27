@@ -8,6 +8,7 @@
       </p>
     </div>
     <CustomButton text="微信登录" size="large" :callback="wechatLogin"/>
+    <button @click="testArr">filter</button>
   </div>
 </template>
 
@@ -46,6 +47,7 @@
       this.userDefineProperty();
       this.getKeysList();
       this.test();
+      this.testIf(5);
     },
     methods: {
       callback() {
@@ -144,6 +146,29 @@
         var path = 'http://www.xxxx.com';//登录后回调的地址
         let appid = '1123456';//注册申请的appid
         window.open('https://open.weixin.qq.com/connect/qrconnect?appid='+appid+'&redirect_uri=path&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect');
+      },
+      testArr() {
+        let a = [1,1,1,1,1,2,3];
+        let b = a.filter((item) => {
+          return item !== 1;
+        });
+        a.concat(b);
+        console.log(a);
+        console.log(b);
+      },
+      testIf( val) {
+        if (val === 1) {
+          console.log(1);
+          // return 1;
+        }
+        if (val === 2) {
+          console.log(2);
+          // return 1;
+        }
+        if (val === 3) {
+          console.log(3);
+          // return 3;
+        }
       }
     }
   }
