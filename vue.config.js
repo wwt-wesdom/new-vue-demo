@@ -36,7 +36,7 @@ module.exports = {
     port: '3702',
     proxy: {
       '/api': {
-        target: 'http://192.168.100.20:9966', // 预发环境
+        target: 'http://192.168.100.27:3705', // 预发环境
         // target: "https://m.chapaiming.com", //正式环境
         changeOrigin: true // 是否跨域
       },

@@ -1,14 +1,11 @@
 <template>
-  <div class="home">
-    <!--<div>count:{{count}}</div>-->
-    <!--<div>time:{{time}}</div>-->
-    <!--<div>{{doneToDos(false)}}</div>-->
+  <div class="user-info">
     <button @click="changeState">state</button>
     <div></div>
     <label>
       <input type="text" v-model="text" />
     </label>
-    <RefUsr ref="childComponent" :text="text"></RefUsr>
+    <ref-user ref="childComponent" :text="text"></ref-user>
     <div>
       <section>
         <router-link to="/toggle-switch">ToggleSwitch</router-link>
@@ -24,22 +21,19 @@
       </section>
     </div>
     <CustomButton text="login" size="small" to="/login"/>
+    <CustomButton text="loginOut" size="small" :callback="logOut"/>
   </div>
 </template>
 
 <script>
   // @ is an alias to /src
-  import HelloWorld from '@/components/HelloWorld.vue';
-  import RefUsr from '@/components/RefUser.vue';
-  import CustomButton from '@/components/CustomButton.vue';
-  import { mapState, mapGetters } from  'vuex'
+  import { mapActions } from  'vuex'
+  import RefUser from "../components/RefUser";
 
   export default {
     name: 'userInfo',
     components: {
-      HelloWorld,
-      RefUsr,
-      CustomButton,
+      RefUser
     },
     data() {
       return {
@@ -65,6 +59,9 @@
     mounted() {
     },
     methods: {
+      ...mapActions([
+        'handleLogOut'
+      ]),
       changeState() {
         // this.$refs.childComponent.value = null;
         console.log(this.$refs.childComponent.value);
@@ -77,6 +74,9 @@
         setTimeout(() => {
           this.loading = false;
         }, 2000)
+      },
+      logOut() {
+        this.handleLogOut(this.$router);
       }
     }
   }

@@ -19,16 +19,29 @@
       </template>
     </custom-slot>
     <div v-for="(item, index) in items" :key="index" @click="changeItem(index, item)">{{item.value}}</div>
-    <div @click="testObject">testObject</div>
+    <van-button type="danger" @click="testObject">testObject</van-button>
+    <div>{{testTryCatch()}}</div>
+    <div :style="{}" @click="testTag">testTag</div>
+    <test-value v-model="message"></test-value>
+    <button @click="postCats">add-cats</button>
+    <div>
+      <button @click="getCats">get-cats</button>
+    </div>
+    <div>
+      <button @click="deleteCats">delete-cats</button>
+    </div>
   </div>
 </template>
 <script>
 
   import api from '@/api/user';
+  import {Button} from 'vant'
 
   export default {
     name: 'About',
-    components: {},
+    components: {
+      vanButton: Button
+    },
     data() {
       return {
         searchText: '',
@@ -38,8 +51,19 @@
           {value: 2,},
           {value: 3,},
           {value: 4,}
-        ]
+        ],
+        message: '小明'
       }
+    },
+    beforeCreate() {
+      // console.log(this);
+      // console.log('beforeCreate');
+    },
+    created() {
+      // console.log(this);
+      // console.log('created');
+      // this.getBrandList();
+      this.getHello();
     },
     methods: {
       changePopup() {
@@ -63,22 +87,34 @@
           this.$Toast(message);
         }
       },
+      async getHello() {
+        await api.getHello();
+      },
       testObject() {
         const o = {data: {a: 1, b: 2, c: 3}};
         const {data: {a, b, c}} = o;
         console.log(a);
         console.log(b);
         console.log(c);
+      },
+      testTryCatch() {
+        try {
+          return 0;
+        } catch (e) {
+          return 0;
+        } finally {
+        }
+      },
+      testTag() {
+        outer: while (true) {
+          console.log(111);
+          inner: while (true) {
+            console.log(222);
+            break outer;
+            console.log(3333);``
+          }
+        }
       }
-    },
-    beforeCreate() {
-      // console.log(this);
-      // console.log('beforeCreate');
-    },
-    created() {
-      // console.log(this);
-      // console.log('created');
-      this.getBrandList();
     },
     beforeMount() {
       // console.log(this);

@@ -102,6 +102,15 @@ export default new Router({
         showTabbar: false,
         needLogin: false,
       }
+    },
+    {
+      path: '/cats',
+      name: 'cats',
+      component: () => import(/* webpackChunkName: "about" */ './views/Cat.vue'),
+      meta: {
+        showTabbar: true,
+        needLogin: false,
+      }
     }
   ]
 })

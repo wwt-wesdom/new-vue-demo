@@ -12,16 +12,20 @@ import { Toast } from 'vant'
 Vue.config.productionTip = false;
 Vue.prototype.$Toast = Toast;
 
+// 本地登录信息校验
+store.commit('checkUserInfo');
+
 // Vue.use(Vuex);
 router.beforeEach((to, from, next) => {
   store.commit('showTabbar', to.meta.showTabbar);
-  if (to.meta.needLogin && !getStorage("login")) {
+  if (to.meta.needLogin && !Object.keys(getStorage("userInfo"))) {
     next("/login");
     // next();
   } else {
     next();
   }
 });
+
 new Vue({
   router,
   store,

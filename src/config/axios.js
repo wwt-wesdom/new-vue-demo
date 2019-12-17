@@ -31,8 +31,8 @@ class HttpRequest {
 
     // 响应拦截
     instance.interceptors.response.use(res => {
-      const { data: { success, message }, status } = res;
-      if (status !== 200) {
+      const { data: { success, message }, status,  } = res;
+      if (status !== 200 && status !== 201) {
         Toast('请求失败');
       } else {
         if (success) {

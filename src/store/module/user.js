@@ -7,6 +7,8 @@ export default {
     hasGetInfo: false,
 
   },
+
+  // 同步更新store使用mutations
   mutations: {
     setUserInfo (state, userInfo) {
       setStorage('userInfo', userInfo);
@@ -32,19 +34,20 @@ export default {
       return Object.keys(state.userInfo).length > 0;
     }
   },
+
+  // 异步使用action
   actions: {
     // 登录
-    async handleLogin ({ commit }, { username, password }) {
-      username = username.trim();
-      const { result } = await userApi.login({
-        username,
-        password
+    async handleLogin ({ commit }, { phone, smsCode }) {
+      const { result, other } = await userApi.loginBySms({
+        phone,
+        smsCode,
+        platForm: 1
       });
-      // setToken('accessToken', result)
-      setStorage('accessToken', result);
-      const { result: userInfoData } = await userApi.getUserInfo();
-      commit('setUserInfo', userInfoData);
+      setStorage('accessToken', other.token);
+      commit('setUserInfo', result);
     },
+
     // 退出登录
     handleLogOut ({ commit }, router) {
       commit('userLogout', router);

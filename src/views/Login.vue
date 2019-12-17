@@ -2,6 +2,7 @@
   <div>
     <van-cell-group>
       <van-field
+              v-model="username"
               label="用户名"
               placeholder="请输入手机号码"/>
       <van-field
@@ -22,6 +23,9 @@
 <script>
   import {Field, Button, CellGroup} from  'vant'
   import { setStorage } from "@/config/utils"
+  import { mapActions } from 'vuex'
+  import userApi from '@/api/user'
+
   export default {
     name: "Login",
     components: {
@@ -32,25 +36,30 @@
     data() {
       return {
         loading: false,
-        sms: ''
+        username: 15757151888,
+        sms: 8888,
       }
     },
     methods: {
-      callback() {
+      ...mapActions([
+          'handleLogin'
+      ]),
+      async callback() {
         this.loading = true;
-        /*setTimeout(() => {
-          this.loading = false;
-          setStorage("login", true);
-          this.$router.go(-1);
-        }, 2000)*/
+        await this.handleSubmit(this.username, this.sms);
+        this.loading = false;
       },
-      getSms() {
-
+      async getSms() {
+        await userApi.sendVerifyCode({
+          phone: this.username,
+          phoneCountryCode: '86',
+          purpose: 'fast'
+        })
       },
-      logout() {
-        setStorage("login", false);
-        this.$router.push({path: "/"});
-      }
+      async handleSubmit(phone, smsCode) {
+        await this.handleLogin({phone, smsCode});
+        this.$router.go(-1);
+      },
     }
   }
 </script>

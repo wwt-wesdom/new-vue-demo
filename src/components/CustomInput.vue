@@ -1,6 +1,6 @@
 <template>
   <label>
-    <van-field v-bind:value="value" v-on:input="$emit('input', $event.target.value)" type="text"/>
+    <van-field class="custom-input" v-bind:value="value" v-on:input="$emit('input', $event.target.value)" type="text"/>
   </label>
 </template>
 
@@ -11,10 +11,15 @@
     components: {
       vanField: Field
     },
-    props: ['value'],
+    props: {
+      value: String
+    },
   }
 </script>
 
 <style scoped>
+  .custom-input {
+    width: 80%;
+  }
 
 </style>
