@@ -4,6 +4,7 @@
     <custom-input v-model="searchText"></custom-input>
     <button @click="changePopup"> toggle </button>
     <custom-popup @hook:mounted="doSomething" v-model="value"></custom-popup>
+    <div>{{ searchText }}</div>
     <custom-slot>
       <template v-slot:title>
         <span>error</span>
@@ -18,17 +19,17 @@
         <div>{{user.lastName}}</div>
       </template>
     </custom-slot>
-    <div v-for="(item, index) in items" :key="index" @click="changeItem(index, item)">{{item.value}}</div>
+    <div v-for="(item, index) in items" :key="index" @click="changeItem(index, item.value)">{{item.value}}</div>
     <van-button type="danger" @click="testObject">testObject</van-button>
     <div>{{testTryCatch()}}</div>
     <div :style="{}" @click="testTag">testTag</div>
     <test-value v-model="message"></test-value>
-    <button @click="postCats">add-cats</button>
+<!--    <button @click="postCats">add-cats</button>-->
     <div>
-      <button @click="getCats">get-cats</button>
+<!--      <button @click="getCats">get-cats</button>-->
     </div>
     <div>
-      <button @click="deleteCats">delete-cats</button>
+<!--      <button @click="deleteCats">delete-cats</button>-->
     </div>
   </div>
 </template>
@@ -44,7 +45,7 @@
     },
     data() {
       return {
-        searchText: '',
+        searchText: 'sssss',
         value: false,
         items: [
           {value: 1,},
@@ -52,7 +53,10 @@
           {value: 3,},
           {value: 4,}
         ],
-        message: '小明'
+        message: '小明',
+        objSet: {
+          age: 10
+        }
       }
     },
     beforeCreate() {
@@ -60,10 +64,12 @@
       // console.log('beforeCreate');
     },
     created() {
+      console.log(this);
       // console.log(this);
       // console.log('created');
       // this.getBrandList();
       this.getHello();
+      this.testPost();
     },
     methods: {
       changePopup() {
@@ -73,11 +79,14 @@
         // console.log("子组件:mounted");
       },
       changeItem(index, item) {
+        // console.log(item, 'before');
         // console.log(index*2);
         // item*= 2; // 不会响应
-        // this.$set(this.items, index, item*2);
-        // this.items.splice(index, 1)
-        this.items[index].value = 10;
+        // console.log(item, 'after');
+        // console.log(item);
+        // this.$set(this.items, index, {value: item*2});
+        this.items.splice(index, 1, {value: 10})
+        // this.items[index].value = 10;
       },
       async getBrandList() {
         const {success, result, message} = await api.getBrandList();
@@ -89,6 +98,11 @@
       },
       async getHello() {
         await api.getHello();
+      },
+      async testPost() {
+        await api.testPost({
+          one: 'one'
+        })
       },
       testObject() {
         const o = {data: {a: 1, b: 2, c: 3}};

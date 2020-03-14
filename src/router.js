@@ -111,6 +111,33 @@ export default new Router({
         showTabbar: true,
         needLogin: false,
       }
+    },
+    {
+      path: '/layout',
+      name: 'layout',
+      component: () => import(/* webpackChunkName: "about" */ './views/Layout.vue'),
+      meta: {
+        showTabbar: true,
+        needLogin: false,
+      }
+    },
+    {
+      path: '/key-use',
+      name: 'keyUse',
+      component: () => import(/* webpackChunkName: "about" */ './views/KeyUse.vue'),
+      meta: {
+        showTabbar: true,
+        needLogin: false,
+      }
+    },
+    {
+      path: '/list-obj-change',
+      name: 'listObjChange',
+      component: () => import(/* webpackChunkName: "about" */ './views/ListAndObjChange.vue'),
+      meta: {
+        showTabbar: true,
+        needLogin: false,
+      }
     }
   ]
 })

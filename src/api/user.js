@@ -38,23 +38,11 @@ export default {
       url: 'test/get-hello'
     })
   },
-  postCats(data) {
+  testPost(data) {
     return axios.request({
       method: axios.requestType.post,
-      url: 'cats/post-cats',
+      url: 'test/test-post',
       data
-    })
-  },
-  deleteCats() {
-    return axios.request({
-      method: axios.requestType.post,
-      url: 'cats/delete-cats'
-    })
-  },
-  getCats() {
-    return axios.request({
-      method: axios.requestType.get,
-      url: 'cats/get-cats',
     })
   }
 }

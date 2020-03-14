@@ -1,7 +1,13 @@
 <template>
   <div style="max-width: 640px; margin: auto; height: 50px; overflow: hidden">
     <van-tabbar v-model="active">
-      <van-tabbar-item v-for="(item, index) in tabbarList" :icon="item.icon" @click="changRouter(index, item.path)">{{item.title}}</van-tabbar-item>
+      <van-tabbar-item
+        v-for="(item, index) in tabbarList"
+        :key="index"
+        :icon="item.icon"
+        @click="changRouter(index, item.path)">
+        {{item.title}}
+      </van-tabbar-item>
     </van-tabbar>
   </div>
 </template>

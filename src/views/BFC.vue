@@ -9,6 +9,7 @@
     </div>
     <CustomButton text="微信登录" size="large" :callback="wechatLogin"/>
     <button @click="testArr">filter</button>
+    <div ref="box" class="box" @click="getWidth"></div>
   </div>
 </template>
 
@@ -52,6 +53,13 @@
     methods: {
       callback() {
         this.$router.push({path: "/Combination"})
+      },
+      getWidth() {
+        const dom = this.$refs.box;
+        let width1 = window.getComputedStyle(dom).width;
+        let width2 = dom.style.width;
+        console.log(width1);
+        console.log(width2);
       },
       test() {
         const
@@ -176,5 +184,11 @@
 
 
 <style scoped>
-
+.box {
+  width: 200px;
+  height: 200px;
+  background-color: yellow;
+  padding: 10px;
+  border: 1px solid #000;
+}
 </style>
