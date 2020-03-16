@@ -7,12 +7,35 @@
 <script>
   import Tabbar from '@/components/Tabbar.vue';
   export default {
+    provide() {
+      return {
+        app: this
+      }
+    },
     components: {
       Tabbar,
+    },
+    data() {
+      return {
+        userInfo: null
+      }
     },
     computed: {
       showTabbar() {
         return this.$store.state.common.showTabbar;
+      }
+    },
+    created() {
+      this.getUserInfo();
+    },
+    methods: {
+      getUserInfo() {
+        setTimeout(()=> {
+          this.userInfo = {
+            name: 'tom',
+            phone: new Date().getMilliseconds()
+          }
+        }, 1000)
       }
     }
   }

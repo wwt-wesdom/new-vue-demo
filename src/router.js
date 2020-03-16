@@ -138,6 +138,15 @@ export default new Router({
         showTabbar: true,
         needLogin: false,
       }
+    },
+    {
+      path: '/use-component',
+      name: 'useComponent',
+      component: () => import(/* webpackChunkName: "about" */ './views/UseComponent.vue'),
+      meta: {
+        showTabbar: true,
+        needLogin: false,
+      }
     }
   ]
 })
