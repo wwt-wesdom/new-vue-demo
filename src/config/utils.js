@@ -544,3 +544,27 @@ export const isInteger = number => {
   const IS_INTEGER = /^\+?[1-9][0-9]*$/;
   return IS_INTEGER.test(number);
 };
+
+/**
+ * 数组去重
+ */
+export const arrUnique = arr => {
+  let newArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] !== arr[i+1]) {
+      newArr.push(arr[i])
+    }
+  }
+  return newArr;
+};
+
+/**
+ * 数组去重ES6
+ */
+export const arrUniqueNew = arr => {
+  if (!arr || !Array.isArray(arr) || arr.length === 0) {
+    console.log('参数错误');
+    return;
+  }
+  return [...new Set(arr)];
+};

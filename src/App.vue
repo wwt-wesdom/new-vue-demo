@@ -6,6 +6,7 @@
 </template>
 <script>
   import Tabbar from '@/components/Tabbar.vue';
+  import obj from '../static/js/learnExport'
   export default {
     provide() {
       return {
@@ -27,6 +28,9 @@
     },
     created() {
       this.getUserInfo();
+      console.log(obj);
+      console.log(obj.walk);
+      obj.exportOne()
     },
     methods: {
       getUserInfo() {
