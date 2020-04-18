@@ -46,269 +46,329 @@
     <div @click="changeObjFun">{{objData.a}}</div>
     <div>{{objData.b}}</div>
     <div @click="testPromise" class="bc-green cl-fff pd-15">promise</div>
+    <!--css动画-->
+    <div>
+      <div class="animation-box">
+        <ul class="animation" ref="aniList">
+          <li v-for="item in cssTextList" :key="item">{{item}}</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-    // @ is an alias to /src
-    import {Swipe, SwipeItem} from 'vant';
-    import html2canvas from 'html2canvas';
-    import _csv from '@/csv/csv';
-    import _exportCsv from '@/csv/export-csv';
-    import {timeToDate} from "@/config/utils"
+  // @ is an alias to /src
+  import {Swipe, SwipeItem} from 'vant';
+  import html2canvas from 'html2canvas';
+  import _csv from '@/csv/csv';
+  import _exportCsv from '@/csv/export-csv';
+  import {timeToDate} from "@/config/utils"
 
-    export default {
-        name: 'home',
-        components: {
-            vanSwipe: Swipe,
-            vanSwipeItem: SwipeItem,
+  export default {
+    name: 'home',
+    components: {
+      vanSwipe: Swipe,
+      vanSwipeItem: SwipeItem,
+    },
+    data() {
+      return {
+        images: [
+          'https://img.yzcdn.cn/vant/apple-1.jpg',
+          'https://img.yzcdn.cn/vant/apple-2.jpg'
+        ],
+        gridList: [],
+        dateUrl: null,
+        imageSrc: null,
+        dlrbImg: "images/dlrb.jpg",
+        excelJson: [
+          {
+            "提交订单号时间": "one",
+            "订单号": "64546465",
+            "旺旺号": "ssdfjasld"
+          },
+          {
+            "提交订单号时间": "one",
+            "订单号": "64546465",
+            "旺旺号": "ssdfjasld"
+          },
+          {
+            "提交订单号时间": "one",
+            "订单号": "64546465",
+            "旺旺号": "ssdfjasld"
+          }
+        ],
+        objData: {
+          a: 'one'
         },
-        data() {
-            return {
-                images: [
-                    'https://img.yzcdn.cn/vant/apple-1.jpg',
-                    'https://img.yzcdn.cn/vant/apple-2.jpg'
-                ],
-                gridList: [],
-                dateUrl: null,
-                imageSrc: null,
-                dlrbImg: "images/dlrb.jpg",
-                excelJson: [
-                    {
-                        "提交订单号时间": "one",
-                        "订单号": "64546465",
-                        "旺旺号": "ssdfjasld"
-                    },
-                    {
-                        "提交订单号时间": "one",
-                        "订单号": "64546465",
-                        "旺旺号": "ssdfjasld"
-                    },
-                    {
-                        "提交订单号时间": "one",
-                        "订单号": "64546465",
-                        "旺旺号": "ssdfjasld"
-                    }
-                ],
-                objData: {
-                    a: 'one'
-                },
-
+        cssTextList: [],
+      }
+    },
+    beforeCreate() {
+      this.baseUrl = process.env;
+      console.log(this.baseUrl);
+    },
+    created() {
+      const that = this;
+      console.log(this.$parent.showTabbar);
+      console.log(this.$children);
+      this.setGridList(9);
+      this.asyncFun().then(res => {
+        // console.log(res);
+      });
+      let i = 14;
+      setInterval(()=>{
+        i++;
+        // that.cssTextListPush(i);
+      },1000)
+    },
+    computed: {
+      getNumber() {
+        return 100;
+      }
+    },
+    mounted() {
+      window.onscroll = () => {
+      }
+    },
+    methods: {
+      changeObjFun() {
+        // 对象添加新属性
+        // this.objData.b = 'two'; // 视图不会刷新
+        // this.objData = Object.assign({}, this.objData, {b: 'two'}); // 视图刷新 （创建新对象｛｝）
+        // this.$set(this.objData, 'b', 'two'); // 使用$set视图刷新
+        const objDataTwo = Object.assign({}, this.objData, {b: 'two'}); // 直接源对象对象合并新对象，视图不会刷新
+        console.log(this.objData === objDataTwo); // false
+        console.log(this.objData);
+      },
+      async testPromise() {
+        console.log(1);
+        let val = await this.sleep(2000);
+        console.log(val);
+        console.log(3);
+      },
+      sleep(time) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            const time = Date.now();
+            console.log(2, 2222222222);
+            if (time % 2 === 0) {
+              resolve(`成功回调${time}`);
+            } else {
+              reject(time, '失败回调');
             }
-        },
-        beforeCreate() {
-            this.baseUrl = process.env;
-            console.log(this.baseUrl);
-        },
-        created() {
-            console.log(this.$parent.showTabbar);
-            console.log(this.$children);
-            this.setGridList(9);
-            this.asyncFun().then(res => {
-                // console.log(res);
-            });
-        },
-        computed: {
-            getNumber() {
-                return 100;
-            }
-        },
-        mounted() {
-            window.onscroll = () => {
-            }
-        },
-        methods: {
-            changeObjFun() {
-                // 对象添加新属性
-                // this.objData.b = 'two'; // 视图不会刷新
-                // this.objData = Object.assign({}, this.objData, {b: 'two'}); // 视图刷新 （创建新对象｛｝）
-                // this.$set(this.objData, 'b', 'two'); // 使用$set视图刷新
-                const objDataTwo = Object.assign({}, this.objData, {b: 'two'}); // 直接源对象对象合并新对象，视图不会刷新
-                console.log(this.objData === objDataTwo); // false
-                console.log(this.objData);
-            },
-            async testPromise() {
-                console.log(1);
-                let val = await this.sleep(2000);
-                console.log(val);
-                console.log(3);
-            },
-            sleep(time) {
-                return new Promise((resolve, reject) => {
-                   setTimeout(() => {
-                       const time =  Date.now();
-                       console.log(2, 2222222222);
-                       if (time %2 === 0) {
-                           resolve(`成功回调${time}`);
-                       } else {
-                           reject(time, '失败回调');
-                       }
 
-                   }, time)
-                })
-            },
-            async newSleep(time) {
-                 setTimeout(
-                    () => {
-                        console.log(2);
-                    }, time
-                )
-            },
-            setGridList(len = 8) {
-                for (let i = 0; i < len; i++) {
-                    this.gridList.push({
-                        index: i,
-                        text: '迪丽热巴',
-                        id: i
-                    })
-                }
-            },
-            targetEle(e) {
-                console.log(JSON.parse(e.target.getAttribute('data-item')));
-            },
-            toImageFun() {
-                const dom = this.$refs.canvasDom;
-                let width = dom.offsetWidth;
-                let height = dom.offsetHeight;
-                let canvas = this.$refs.canvas;
-                let scale = 2;
-                canvas.width = width * scale;
-                canvas.height = height * scale;
-                canvas.getContext("2d").scale(scale, scale);
-                let opts = {
-                    backgroundColor: null,
-                    scale: scale,
-                    canvas: canvas,
-                    logging: true,
-                    width: width,
-                    height: height
-                };
-                html2canvas(dom, opts).then(canvas => {
-                    const context = canvas.getContext('2d');
-                    context.mozImageSmoothingEnabled = false;
-                    context.webkitImageSmoothingEnabled = false;
-                    context.msImageSmoothingEnabled = false;
-                    context.imageSmoothingEnabled = false;
-                    this.dateUrl = canvas.toDataURL("image/png");
-                })
-            },
-            asyncFun() {
-                return new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                    })
-                })
-            },
-            uploadImg(e) {
-                const that = this;
-                const imgFile = {};
-                const file = e.target.files[0];
-                if (!file) return;
-                imgFile.type = file.type || "image/jpeg";
-                imgFile.size = file.size;
-                imgFile.name = file.name;
-                imgFile.lastModifiedDate = file.lastModifiedDate;
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const result = e.target.result;
-                    const image = new Image();
-                    image.onload = function () {
-                        let width = image.width;
-                        let height = image.height;
-                        console.log(width);
-                        console.log(height);
-                    };
-                    image.src = result;
-                    // compress(result,false)
-                    that.imageSrc = result;
-                };
-                reader.readAsDataURL(file);
-
-                function compress(dataURL, shouldCompress = true) {
-                    const img = new Image();
-
-                    img.src = dataURL;
-
-                    img.onload = function () {
-                        const canvas = document.createElement('canvas');
-                        const ctx = canvas.getContext('2d');
-
-                        canvas.width = img.width;
-                        canvas.height = img.height;
-
-                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-                        let compressedDataUrl;
-
-                        if (shouldCompress) {
-                            compressedDataUrl = canvas.toDataURL(imgFile.type, 0.2);
-                        } else {
-                            compressedDataUrl = canvas.toDataURL(imgFile.type, 1);
-                        }
-                        that.imageSrc = compressedDataUrl;
-                        // callback(compressedDataUrl);
-                    }
-                }
-
-                function processData(dataURL) {
-                    // 这里使用二进制方式处理dataUrl
-                    const binaryString = window.atob(dataUrl.split(',')[1]);
-                    const arrayBuffer = new ArrayBuffer(binaryString.length);
-                    const intArray = new Uint8Array(arrayBuffer);
-                    const imgFile = this.imgFile;
-
-                    for (let i = 0, j = binaryString.length; i < j; i++) {
-                        intArray[i] = binaryString.charCodeAt(i);
-                    }
-
-                    const data = [intArray];
-
-                    let blob;
-
-                    try {
-                        blob = new Blob(data, {type: imgFile.type});
-                    } catch (error) {
-                        window.BlobBuilder = window.BlobBuilder ||
-                            window.WebKitBlobBuilder ||
-                            window.MozBlobBuilder ||
-                            window.MSBlobBuilder;
-                        if (error.name === 'TypeError' && window.BlobBuilder) {
-                            const builder = new BlobBuilder();
-                            builder.append(arrayBuffer);
-                            blob = builder.getBlob(imgFile.type);
-                        } else {
-                            // Toast.error("版本过低，不支持上传图片", 2000, undefined, false);
-                            throw new Error('版本过低，不支持上传图片');
-                        }
-                    }
-
-                    // blob 转file
-                    const fileOfBlob = new File([blob], imgFile.name);
-                    const formData = new FormData();
-
-                    // type
-                    formData.append('type', imgFile.type);
-                    // size
-                    formData.append('size', fileOfBlob.size);
-                    // name
-                    formData.append('name', imgFile.name);
-                    // lastModifiedDate
-                    formData.append('lastModifiedDate', imgFile.lastModifiedDate);
-                    // append 文件
-                    formData.append('file', fileOfBlob);
-                }
-            },
-            excelFun() {
-                const downloadData = _csv([{key: '提交订单号时间'}, {key: '订单号'}, {key: '旺旺号'}], this.excelJson);
-                _exportCsv.download(`${timeToDate()}.csv`, downloadData, () => {
-                    console.log('批量导出订单成功！');
-                })
-            }
+          }, time)
+        })
+      },
+      async newSleep(time) {
+        setTimeout(
+          () => {
+            console.log(2);
+          }, time
+        )
+      },
+      setGridList(len = 8) {
+        for (let i = 0; i < len; i++) {
+          this.gridList.push({
+            index: i,
+            text: '迪丽热巴',
+            id: i
+          });
+          this.cssTextList.push(i)
         }
+      },
+      cssTextListPush(i) {
+        this.cssTextList.push(i)
+      },
+
+      targetEle(e) {
+        console.log(JSON.parse(e.target.getAttribute('data-item')));
+      },
+      toImageFun() {
+        const dom = this.$refs.canvasDom;
+        let width = dom.offsetWidth;
+        let height = dom.offsetHeight;
+        let canvas = this.$refs.canvas;
+        let scale = 2;
+        canvas.width = width * scale;
+        canvas.height = height * scale;
+        canvas.getContext("2d").scale(scale, scale);
+        let opts = {
+          backgroundColor: null,
+          scale: scale,
+          canvas: canvas,
+          logging: true,
+          width: width,
+          height: height
+        };
+        html2canvas(dom, opts).then(canvas => {
+          const context = canvas.getContext('2d');
+          context.mozImageSmoothingEnabled = false;
+          context.webkitImageSmoothingEnabled = false;
+          context.msImageSmoothingEnabled = false;
+          context.imageSmoothingEnabled = false;
+          this.dateUrl = canvas.toDataURL("image/png");
+        })
+      },
+      asyncFun() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+          })
+        })
+      },
+      uploadImg(e) {
+        const that = this;
+        const imgFile = {};
+        const file = e.target.files[0];
+        if (!file) return;
+        imgFile.type = file.type || "image/jpeg";
+        imgFile.size = file.size;
+        imgFile.name = file.name;
+        imgFile.lastModifiedDate = file.lastModifiedDate;
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const result = e.target.result;
+          const image = new Image();
+          image.onload = function () {
+            let width = image.width;
+            let height = image.height;
+            console.log(width);
+            console.log(height);
+          };
+          image.src = result;
+          // compress(result,false)
+          that.imageSrc = result;
+        };
+        reader.readAsDataURL(file);
+
+        function compress(dataURL, shouldCompress = true) {
+          const img = new Image();
+
+          img.src = dataURL;
+
+          img.onload = function () {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            let compressedDataUrl;
+
+            if (shouldCompress) {
+              compressedDataUrl = canvas.toDataURL(imgFile.type, 0.2);
+            } else {
+              compressedDataUrl = canvas.toDataURL(imgFile.type, 1);
+            }
+            that.imageSrc = compressedDataUrl;
+            // callback(compressedDataUrl);
+          }
+        }
+
+        function processData(dataURL) {
+          // 这里使用二进制方式处理dataUrl
+          const binaryString = window.atob(dataUrl.split(',')[1]);
+          const arrayBuffer = new ArrayBuffer(binaryString.length);
+          const intArray = new Uint8Array(arrayBuffer);
+          const imgFile = this.imgFile;
+
+          for (let i = 0, j = binaryString.length; i < j; i++) {
+            intArray[i] = binaryString.charCodeAt(i);
+          }
+
+          const data = [intArray];
+
+          let blob;
+
+          try {
+            blob = new Blob(data, {type: imgFile.type});
+          } catch (error) {
+            window.BlobBuilder = window.BlobBuilder ||
+              window.WebKitBlobBuilder ||
+              window.MozBlobBuilder ||
+              window.MSBlobBuilder;
+            if (error.name === 'TypeError' && window.BlobBuilder) {
+              const builder = new BlobBuilder();
+              builder.append(arrayBuffer);
+              blob = builder.getBlob(imgFile.type);
+            } else {
+              // Toast.error("版本过低，不支持上传图片", 2000, undefined, false);
+              throw new Error('版本过低，不支持上传图片');
+            }
+          }
+
+          // blob 转file
+          const fileOfBlob = new File([blob], imgFile.name);
+          const formData = new FormData();
+
+          // type
+          formData.append('type', imgFile.type);
+          // size
+          formData.append('size', fileOfBlob.size);
+          // name
+          formData.append('name', imgFile.name);
+          // lastModifiedDate
+          formData.append('lastModifiedDate', imgFile.lastModifiedDate);
+          // append 文件
+          formData.append('file', fileOfBlob);
+        }
+      },
+      excelFun() {
+        const downloadData = _csv([{key: '提交订单号时间'}, {key: '订单号'}, {key: '旺旺号'}], this.excelJson);
+        _exportCsv.download(`${timeToDate()}.csv`, downloadData, () => {
+          console.log('批量导出订单成功！');
+        })
+      }
     }
+  }
 
 </script>
 <style scoped lang="scss">
+  .animation-box {
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    background-color: yellowgreen;
+  }
+  .animation {
+    height: 900px;
+    width: 100%;
+    position: absolute;
+    animation: carousel linear 5s infinite 0s normal;
+    background-color: red;
+  }
+  .animation li {
+    color: #fff;
+    height: 60px;
+    line-height: 60px;
+    text-align: left;
+    display: block;
+    width: 100%;
+  }
 
+  @keyframes carousel {
+    0% {
+      top: 0;
+    }
+    20% {
+      top: -60px;
+    }
+    40% {
+      top: -120px;
+    }
+    60% {
+      top: -180px;
+    }
+    80% {
+      top: -240px;
+    }
+    100% {
+      top: -300px;
+    }
+  }
   #anim {
     width: 200px;
     height: 400px;

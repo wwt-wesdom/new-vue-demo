@@ -568,3 +568,21 @@ export const arrUniqueNew = arr => {
   }
   return [...new Set(arr)];
 };
+
+/**
+ * 数组去重最终版，数组每一项可以是对象
+ */
+export const arrUniqueFinal = arr => {
+  if (!arr || !Array.isArray(arr) || arr.length === 0) {
+    console.log('参数错误');
+    return;
+  }
+  let unique = {};
+  arr.forEach(item => {
+    unique[JSON.stringify(item, Object.keys(item).sort())] = item;
+  });
+  arr = Object.keys(unique).map(item => JSON.parse(item));
+  return arr;
+};
+
+export const
