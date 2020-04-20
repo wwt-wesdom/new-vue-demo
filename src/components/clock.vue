@@ -57,7 +57,7 @@
           ctx.beginPath();
           ctx.lineCap = "round";
           ctx.lineWidth = 6;
-          ctx.fillStyle = 'blue';
+          ctx.strokeStyle = '#333';
           let rad = 2*Math.PI/12*hour;
           let mRad =  2*Math.PI/12/60*minute;
           ctx.rotate(rad + mRad);
@@ -71,7 +71,7 @@
           ctx.beginPath();
           ctx.lineCap = "round";
           ctx.lineWidth = 3;
-          ctx.fillStyle = 'red';
+          ctx.strokeStyle = 'red';
           let rad = 2*Math.PI/60*minute;
           ctx.rotate(rad);
           ctx.moveTo(0, 10);
@@ -86,8 +86,8 @@
           ctx.fillStyle = 'green';
           let rad = 2*Math.PI/60*second;
           ctx.rotate(rad);
-          ctx.moveTo(-2, 10);
-          ctx.lineTo(2, 10);
+          ctx.moveTo(-2, 20);
+          ctx.lineTo(2, 20);
           ctx.lineTo(1, -r + 11);
           ctx.lineTo(-1, -r + 11);
           ctx.fill();
