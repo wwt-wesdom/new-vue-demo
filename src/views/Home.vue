@@ -54,6 +54,7 @@
         </ul>
       </div>
     </div>
+    <clock></clock>
   </div>
 </template>
 
