@@ -12,23 +12,56 @@
       <span>lsdkf</span>
       <img style="width: 20px; height: 20px;" src="~assets/img/common/dlrb.jpg" @click="testFlex"/>
     </div>
+    <dispatch></dispatch>
+    <div>
+      <c-button class="mt-20" @on-click="parentBroadcast"></c-button>
+    </div>
+<!--    <my-input type="text" v-model="inputValue" class="mt-20"/>-->
+    <my-form ref="form" :model="formValidate" :rules="ruleValidate">
+      <my-form-item label="用户名" prop="name">
+        <my-input v-model="formValidate.name"></my-input>
+      </my-form-item>
+      <my-form-item label="邮箱" prop="mail">
+        <my-input v-model="formValidate.mail"></my-input>
+      </my-form-item>
+    </my-form>
+    <c-button @on-click="handleSubmit">提交</c-button>
+    <c-button @on-click="handleReset">重置</c-button>
   </div>
 </template>
 
 <script>
   import {arrUnique} from '@/config/utils'
-
+  import emitter from "../mixins/emitter";
+  import Input from "../components/MyInput";
   export default {
     name: "UseComponent",
+    components: {Input},
     provide: {
       name: 'joke',
       age: 18
     },
     inject: ['app'],
+    mixins: [emitter],
     data() {
       return {
         checked: true,
-        fullName: 'wwt'
+        fullName: 'wwt',
+        inputValue: '',
+        formValidate: {
+          name: 'wwt',
+          mail: ''
+        },
+        ruleValidate: {
+          name: [
+            { required: true, message: '用户名不能为空', trigger: 'change' },
+            { required: 'number', message: '用户名为数字', trigger: 'change' },
+          ],
+          mail: [
+            { required: true, message: '邮箱不能为空', trigger: 'blur' },
+            { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
+          ],
+        }
       }
     },
     mounted() {
@@ -39,8 +72,26 @@
       console.log(arrUnique(arr));
       console.log(this.$root.globalData);
       console.log(this.arrUniqueNew(), 'new');
+      this.$on('test', function (text) {
+        console.log(text);
+      })
     },
     methods: {
+      handleSubmit() {
+        this.$refs.form.validate().then(res => {
+          if (res) {
+            alert('提交成功！')
+          } else {
+            alert('提交失败！')
+          }
+        })
+      },
+      handleReset() {
+        this.$refs.form.resetFields()
+      },
+      parentBroadcast() {
+        this.broadcast('Dispatch', 'parent-broadcast', 'hello child')
+      },
       testFlex() {
         console.log(111111111111)
       },

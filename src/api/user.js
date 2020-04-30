@@ -44,5 +44,13 @@ export default {
       url: 'test/test-post',
       data
     })
+  },
+  readFile(data) {
+    return axios.request({
+      method: axios.requestType.post,
+      url: 'test/read-file',
+      data
+    })
   }
+
 }

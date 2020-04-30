@@ -7,6 +7,7 @@
 <script>
   import Tabbar from '@/components/Tabbar.vue';
   import obj from '../static/js/learnExport'
+  import mixin_user from './mixins/user.js'
   export default {
     provide() {
       return {
@@ -16,9 +17,9 @@
     components: {
       Tabbar,
     },
+    mixins: [mixin_user],
     data() {
       return {
-        userInfo: null
       }
     },
     computed: {
@@ -27,20 +28,11 @@
       }
     },
     created() {
-      this.getUserInfo();
       console.log(obj);
       console.log(obj.walk);
       obj.exportOne()
     },
     methods: {
-      getUserInfo() {
-        setTimeout(()=> {
-          this.userInfo = {
-            name: 'tom',
-            phone: new Date().getMilliseconds()
-          }
-        }, 1000)
-      }
     }
   }
 </script>

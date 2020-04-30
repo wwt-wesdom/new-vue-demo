@@ -37,7 +37,8 @@ module.exports = {
     proxy: {
       '/api': {
         // target: 'http://192.168.1.6:3705', // 开发环境
-        target: "https://m.chapaiming.com", //正式环境
+        // target: "https://m.chapaiming.com", //正式环境
+        target: "http://192.168.0.236:3705",
         changeOrigin: true // 是否跨域
       },
     }

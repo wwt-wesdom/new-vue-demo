@@ -6,7 +6,7 @@
       :loading="loading"
       loading-type="spinner"
       :to="to"
-      @click="callback"
+      @click="callbackHandle"
       class="button"
     >
       {{ text }}
@@ -42,11 +42,6 @@
         default: false,
         type: Boolean,
       },
-      callback: {
-        default: () => {
-        },
-        type: Function
-      },
       to: {
         default: '',
         type: String,
@@ -58,6 +53,16 @@
       height: {
         default: '40',
         type: String
+      }
+    },
+    mounted() {
+      this.$on('parent-broadcast', function (text) {
+        console.log(text + ' ' +  this.$options.name);
+      })
+    },
+    methods: {
+      callbackHandle() {
+        this.$emit('on-click');
       }
     }
   }

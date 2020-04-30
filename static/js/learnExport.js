@@ -31,7 +31,7 @@ function exportOne() {
 function exportTwo() {
   console.log('one');
 }
-module.exports = {
+export default {
   exportOne,
   exportTwo,
   data() {

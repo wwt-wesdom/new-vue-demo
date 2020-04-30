@@ -546,10 +546,11 @@ export const isInteger = number => {
 };
 
 /**
- * 数组去重
+ * 数组去重(先排序)
  */
 export const arrUnique = arr => {
   let newArr = [];
+  arr.sort();
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] !== arr[i+1]) {
       newArr.push(arr[i])

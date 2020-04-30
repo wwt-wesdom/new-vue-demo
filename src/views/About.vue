@@ -31,6 +31,8 @@
     <div>
 <!--      <button @click="deleteCats">delete-cats</button>-->
     </div>
+    <img width="100%" v-for="item in imageList" :key="item" :src="item" alt="">
+    <van-button type="danger" @click="readFile">readFile</van-button>
   </div>
 </template>
 <script>
@@ -56,7 +58,8 @@
         message: '小明',
         objSet: {
           age: 10
-        }
+        },
+        imageList: [],
       }
     },
     beforeCreate() {
@@ -103,6 +106,10 @@
         await api.testPost({
           one: 'one'
         })
+      },
+      async readFile() {
+        const {result} = await api.readFile();
+        this.imageList = result.data;
       },
       testObject() {
         const o = {data: {a: 1, b: 2, c: 3}};
