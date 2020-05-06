@@ -27,6 +27,10 @@
     </my-form>
     <c-button @on-click="handleSubmit">提交</c-button>
     <c-button @on-click="handleReset">重置</c-button>
+<!--    <my-popup v-model="showPop"></my-popup>-->
+    <my-popup :value="showPop" @input="showPop = arguments[0]"></my-popup>
+    <c-button @on-click="showPop = !showPop">openPop</c-button>
+    <my-select v-model="selected" :selectArr="selectArr"></my-select>
   </div>
 </template>
 
@@ -61,7 +65,10 @@
             { required: true, message: '邮箱不能为空', trigger: 'blur' },
             { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
           ],
-        }
+        },
+        showPop: false,
+        selectArr: ['apple','banana', 'orange'],
+        selected: 'banana'
       }
     },
     mounted() {
