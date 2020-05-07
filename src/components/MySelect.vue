@@ -1,6 +1,6 @@
 <template>
   <label>
-    <select :selected="selected" @change="change($event.target.value)">
+    <select :value="selected" :selected="selected" @change="change($event.target.value)">
       <template v-for="(item) in selectArr">
         <option :value="item">
           {{item}}
@@ -16,6 +16,12 @@
     model: {
       prop: 'selected',
       event: 'change'
+    },
+    data() {
+      return {
+      }
+    },
+    created() {
     },
     props: {
       selectArr: {

@@ -1,16 +1,19 @@
 import Vue from 'vue'
 import App from './App.vue'
+import TestVueComponent from "./components/test/TestVueComponent";
 import router from './router'
 import store from './store/index.js'
 import "@/scss/common.scss";
 import { getStorage } from "@/config/utils";
 import "lib-flexible/flexible"
+import Alert from "./components/alert/alert.js";
 // import Vuex from 'vuex'
 import '@/components/index'
 import { Toast } from 'vant'
 
 Vue.config.productionTip = false;
 Vue.prototype.$Toast = Toast;
+Vue.prototype.$Alert = Alert.info;
 
 var EventBus = new Vue();
 
@@ -37,7 +40,6 @@ router.beforeEach((to, from, next) => {
 });
 
 
-
 new Vue({
   router,
   store,
@@ -46,3 +48,9 @@ new Vue({
   },
   render: h => h(App)
 }).$mount('#app');
+
+const testNode = new Vue({
+  render: h => h(TestVueComponent)
+});
+console.log(testNode.$el);
+// document.body.appendChild(testNode.$el);

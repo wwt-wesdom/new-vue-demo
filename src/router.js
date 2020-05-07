@@ -147,6 +147,15 @@ export default new Router({
         showTabbar: true,
         needLogin: false,
       }
+    },
+    {
+      path: '/display',
+      name: 'display',
+      component: () => import(/* webpackChunkName: "display" */ './views/Display.vue'),
+      meta: {
+        showTabbar: true,
+        needLogin: false,
+      }
     }
   ]
 })

@@ -6,6 +6,7 @@ const resolve = dir => {
 };
 
 module.exports = {
+  runtimeCompiler: true,
   publicPath: "./",
   productionSourceMap: false,
   css: {
