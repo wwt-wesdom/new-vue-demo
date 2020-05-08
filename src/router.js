@@ -156,6 +156,24 @@ export default new Router({
         showTabbar: true,
         needLogin: false,
       }
+    },
+    {
+      path: '/table-render',
+      name: 'tableRender',
+      component: () => import(/* webpackChunkName: "display" */ './views/table/TableRender'),
+      meta: {
+        showTabbar: true,
+        needLogin: false,
+      }
+    },
+    {
+      path: '/table-slot',
+      name: 'tableSlot',
+      component: () => import(/* webpackChunkName: "display" */ './views/table/TableSlot'),
+      meta: {
+        showTabbar: true,
+        needLogin: false,
+      }
     }
   ]
 })

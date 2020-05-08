@@ -13,7 +13,7 @@
   export default {
     data () {
       return {
-        code: defaultCode
+        code: defaultCode,
       }
     },
     methods: {
@@ -21,6 +21,16 @@
         this.$Alert({
           content: '提示框',
           duration: 2000
+        });
+        this.$Model({
+          title: '我的标题',
+          content: '爱丽丝发生的楼房萨克大幅拉升',
+          confirmCallback(res) {
+
+          },
+          cancelCallback(res) {
+            console.log(res);
+          }
         });
       }
     }
