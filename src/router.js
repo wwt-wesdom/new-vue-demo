@@ -174,6 +174,15 @@ export default new Router({
         showTabbar: true,
         needLogin: false,
       }
+    },
+    {
+      path: '/tree',
+      name: 'tree',
+      component: () => import(/* webpackChunkName: "Tree" */ './views/Tree'),
+      meta: {
+        showTabbar: true,
+        needLogin: false,
+      }
     }
   ]
 })
