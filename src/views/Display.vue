@@ -9,12 +9,15 @@
 </template>
 <script>
   import defaultCode from './default-code.js';
-
+  import info from '../config/module'
   export default {
     data () {
       return {
         code: defaultCode,
       }
+    },
+    created() {
+      console.log(info);
     },
     methods: {
       alertPop() {
