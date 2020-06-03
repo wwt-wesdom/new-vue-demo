@@ -571,7 +571,7 @@ export const arrUniqueNew = arr => {
 };
 
 /**
- * 数组去重最终版，数组每一项可以是对象
+ * 数组去重最终版，数组每一项可以是对象或者数组
  */
 export const arrUniqueFinal = arr => {
   if (!arr || !Array.isArray(arr) || arr.length === 0) {

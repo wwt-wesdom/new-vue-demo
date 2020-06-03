@@ -30,6 +30,15 @@
       <div class="center">2table</div>
       <div class="right">3</div>
     </article>
+
+    <iframe sandbox srcdoc="<p>Yeah, you can see it <a href='/gallery?mode=cover&amp;amp;page=1'>in my gallery</a>."></iframe>
+    <div class="outer">
+      <div class="fixed"></div>
+      <div class="auto">
+       auto
+      </div>
+    </div>
+    <img src='data:image/svg+xml;charset=utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:1;stroke:rgb(0,0,0)"/></svg>'/>
   </div>
 </template>
 
@@ -157,6 +166,28 @@
     }
     .center {
       background-color: yellow;
+    }
+  }
+  .outer {
+    margin-top: 30px;
+    .fixed {
+      width: 200px;
+      height: 50px;
+      display: inline-block;
+      background-color: red;
+      vertical-align: top;
+      transform: translateZ(0);
+    }
+    .auto {
+      width: 100%;
+      margin-left: -200px;
+      display: inline-block;
+      height: 50px;
+      padding-left: 200px;
+      box-sizing: border-box;
+      vertical-align: top;
+      text-align: left;
+      background-color: blue;
     }
   }
 </style>

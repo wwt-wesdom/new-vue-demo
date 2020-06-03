@@ -55,6 +55,7 @@
       </div>
     </div>
     <clock></clock>
+    <router-link to="/text-page">textPage</router-link>
   </div>
 </template>
 
