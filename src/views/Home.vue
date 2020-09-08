@@ -229,6 +229,7 @@
         imgFile.name = file.name;
         imgFile.lastModifiedDate = file.lastModifiedDate;
         const reader = new FileReader();
+        reader.readAsDataURL(file);
         reader.onload = function (e) {
           const result = e.target.result;
           const image = new Image();
@@ -242,7 +243,6 @@
           // compress(result,false)
           that.imageSrc = result;
         };
-        reader.readAsDataURL(file);
 
         function compress(dataURL, shouldCompress = true) {
           const img = new Image();

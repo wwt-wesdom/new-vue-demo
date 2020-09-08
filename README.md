@@ -28,3 +28,13 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 "# new-vue-demo" 
+
+## 路由钩子执行顺序
+进入组件
+beforeEach
+beforeRouterEnter
+afterEach
+离开组件
+beforeRouterLeave
+beforeEach
+afterEach

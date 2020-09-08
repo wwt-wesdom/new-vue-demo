@@ -32,6 +32,7 @@ store.commit('checkUserInfo');
 
 // Vue.use(Vuex);
 router.beforeEach((to, from, next) => {
+  console.log('============beforeEach=============');
   store.commit('showTabbar', to.meta.showTabbar);
   if (to.meta.needLogin && (!getStorage("userInfo") || Object.keys(getStorage("userInfo")).length === 0)) {
     next("/login");
@@ -40,6 +41,11 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+
+// 全局后置钩子，没有next回调
+router.afterEach((to, from) => {
+  console.log('============afterEach=============');
+})
 
 
 new Vue({

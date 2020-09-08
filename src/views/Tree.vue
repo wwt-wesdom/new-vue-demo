@@ -1,13 +1,20 @@
 <template>
-  <my-tree
-    :data="data"
-    show-checkbox
-  ></my-tree>
+  <div>
+    <my-tree
+      :data="data"
+      show-checkbox
+    ></my-tree>
+    <login></login>
+  </div>
 </template>
 
 <script>
+  import login from '@/components/login/Login.vue'
   export default {
     name: "Tree",
+    components: {
+      login
+    },
     data() {
       return {
         data: [

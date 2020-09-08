@@ -69,19 +69,17 @@
       }
     },
     beforeRouteEnter(to, from, next) {
-      console.log(this);
-      console.log(to);
-      console.log(from);
+      // 组件实例还未创建调用, 跳转还未被确认
+      console.log('beforeRouteEnter');
       next(vm => {
-        console.log(11111);
         console.log(vm);
       });
     },
     beforeRouteUpdate(to, from ,next) {
-      console.log(to);
       next()
     },
     beforeRouteLeave (to, from, next) {
+      console.log('beforeRouteLeave');
       const answer = window.confirm('Do you really want to leave? you have unsaved changes!')
       if (answer) {
         next()

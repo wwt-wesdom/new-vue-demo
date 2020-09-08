@@ -579,9 +579,24 @@ export const arrUniqueFinal = arr => {
     return;
   }
   let unique = {};
+  function sortArr(obj) {
+    if (typeof obj !== "object" || obj === null) {
+      return obj;
+    } else {
+      if (Array.isArray(obj)) {
+        return obj.sort();
+      }
+      return Object.keys(obj).sort();
+    }
+  }
   arr.forEach(item => {
-    unique[JSON.stringify(item, Object.keys(item).sort())] = item;
+    unique[JSON.stringify(item, sortArr(item))] = item;
   });
-  arr = Object.keys(unique).map(item => JSON.parse(item));
-  return arr;
+  return Object.keys(unique).map(item => {
+    if (item === 'undefined') {
+      return undefined
+    } else {
+      return JSON.parse(item);
+    }
+  });
 };
