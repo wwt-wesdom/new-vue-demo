@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <button @click="getObj">clone</button>
   </div>
 </template>

@@ -183,6 +183,24 @@ export default new Router({
         showTabbar: true,
         needLogin: false,
       }
+    },
+    {
+      path: '/drag',
+      name: 'drag',
+      component: () => import(/* webpackChunkName: "about" */ './views/Drag.vue'),
+      meta: {
+        showTabbar: false,
+        needLogin: false,
+      }
+    },
+    {
+      path: '/slot-use',
+      name: 'slotUse',
+      component: () => import(/* webpackChunkName: "about" */ './views/SlotUse.vue'),
+      meta: {
+        showTabbar: false,
+        needLogin: false,
+      }
     }
   ]
 })
