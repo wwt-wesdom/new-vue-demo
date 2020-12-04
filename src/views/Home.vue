@@ -55,6 +55,7 @@
       </div>
     </div>
     <clock></clock>
+    <rotate></rotate>
   </div>
 </template>
 
