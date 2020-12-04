@@ -33,6 +33,7 @@
     </div>
     <img width="100%" v-for="item in imageList" :key="item" :src="item" alt="">
     <van-button type="danger" @click="readFile">readFile</van-button>
+    <van-button type="danger" @click="showToast">wToast</van-button>
   </div>
 </template>
 <script>
@@ -75,6 +76,9 @@
       this.testPost();
     },
     methods: {
+      showToast() {
+        this.$wToast.show('弹窗');
+      },
       changePopup() {
         this.value = !this.value;
       },
