@@ -25,6 +25,7 @@
       }
     },
     methods: {
+
       rotateBox() {
         let obj = {
           0: 337.5, // 360 - 22.5

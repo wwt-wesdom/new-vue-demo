@@ -1,9 +1,12 @@
 {
   "name": "new-vue-demo",
   "version": "0.1.0",
+  "main": "electron.js",
+  "author": "wwt",
+  "description": "a vue-electron app",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --open",
+    "serve": "vue-cli-service serve --progress --open",
     "build": "vue-cli-service build"
   },
   "dependencies": {
@@ -24,6 +27,7 @@
     "async-validator": "^3.2.4",
     "babel-plugin-import": "^1.12.0",
     "canvas2image": "^1.0.5",
+    "electron": "^11.3.0",
     "fibers": "^3.1.1",
     "html2canvas": "^1.0.0-rc.3",
     "less": "^3.9.0",

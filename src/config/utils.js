@@ -197,9 +197,7 @@ export const convertUTCTimeToLocalTime = UTCDateString => {
   var hour = formatFunc(date2.getHours());
   var min = formatFunc(date2.getMinutes());
   var sec = formatFunc(date2.getSeconds());
-  var dateStr =
-    year + "-" + mon + "-" + day + " " + hour + ":" + min + ":" + sec;
-  return dateStr;
+  return year + "-" + mon + "-" + day + " " + hour + ":" + min + ":" + sec;
 };
 
 /**
@@ -313,7 +311,7 @@ export const getUrlParameter = name => {
 };
 
 // 保存图片到本地
-export const downloadIamge = (imgsrc, name) => {
+export const downloadImage = (imgsrc, name) => {
   var alink = document.createElement("a");
   alink.href = imgsrc;
   alink.download = name; //图片名

@@ -201,6 +201,15 @@ export default new Router({
         showTabbar: false,
         needLogin: false,
       }
+    },
+    {
+      path: '/css-learn',
+      name: 'cssLearn',
+      component: () => import(/* webpackChunkName: "about" */ './views/CssLearn.vue'),
+      meta: {
+        showTabbar: false,
+        needLogin: false,
+      }
     }
   ]
 })

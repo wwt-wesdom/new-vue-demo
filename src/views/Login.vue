@@ -15,7 +15,7 @@
         <van-button @click="getSms" slot="button" size="small" type="primary">发送验证码</van-button>
       </van-field>
     </van-cell-group>
-    <custom-button class="mt-20" text="登陆" :loading="loading" width="300" :callback="callback" />
+    <custom-button class="mt-20" text="登陆" :loading="loading" width="300" @click.native="callback" />
     <!--<custom-button text="退出登陆" :callback="logout" />-->
   </div>
 </template>
@@ -44,10 +44,13 @@
       ...mapActions([
           'handleLogin'
       ]),
-      async callback() {
-        this.loading = true;
-        await this.handleSubmit(this.username, this.sms);
-        this.loading = false;
+      callback() {
+        console.log(1111);
+        this.$showLogin.open();
+
+        // this.loading = true;
+        // await this.handleSubmit(this.username, this.sms);
+        // this.loading = false;
       },
       async getSms() {
         await userApi.sendVerifyCode({

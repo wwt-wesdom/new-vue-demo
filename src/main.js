@@ -9,15 +9,19 @@ import "lib-flexible/flexible"
 import Alert from "./components/alert/alert.js";
 import Model from "./components/model/model.js";
 import WToast from "./components/wToast/index";
+import WConfirm from "./components/wConfirm/index";
+import LoginPopup from "./components/loginPop/index"
 // import Vuex from 'vuex'
 import '@/components/index'
 import { Toast } from 'vant'
+
 
 Vue.config.productionTip = false;
 Vue.prototype.$Toast = Toast;
 Vue.prototype.$Alert = Alert.info;
 Vue.prototype.$Model = Model;
 Vue.use(WToast);
+Vue.use(WConfirm);
 
 var EventBus = new Vue();
 
@@ -64,3 +68,10 @@ const testNode = new Vue({
 });
 console.log(testNode.$el);
 // document.body.appendChild(testNode.$el);
+
+
+
+
+
+
+

@@ -21,6 +21,13 @@
       </div>
     </transition>
     <c-button @on-click="changeUrlParams">changeUrlParams</c-button>
+    <c-button @on-click="showConfirm">confirm</c-button>
+    <div>
+      <input v-model="color" style="display: none" id="selectColor" type="color">
+      <label for="selectColor">
+        选择颜色{{color}}
+      </label>
+    </div>
   </div>
 </template>
 
@@ -52,6 +59,7 @@
         ],
         show: false,
         id: 0,
+        color: '',
       }
     },
     watch: {
@@ -66,6 +74,16 @@
       changeUrlParams() {
         this.id ++;
         this.$router.push({path: '/text-page', query: {id: this.id}})
+      },
+      showConfirm() {
+        this.$wConfirm({
+          title: '弹窗啊',
+          content: '啦啦啦啦啦啦啦啦啦啦啦啦啦'
+        }).then(res => {
+          console.log(res);
+        }).catch(e => {
+          console.log(e);
+        })
       }
     },
     beforeRouteEnter(to, from, next) {
@@ -79,6 +97,7 @@
       next()
     },
     beforeRouteLeave (to, from, next) {
+      this.showConfirm();
       console.log('beforeRouteLeave');
       const answer = window.confirm('Do you really want to leave? you have unsaved changes!')
       if (answer) {

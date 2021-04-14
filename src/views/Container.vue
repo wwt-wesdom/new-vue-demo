@@ -39,6 +39,32 @@
       </div>
     </div>
     <img src='data:image/svg+xml;charset=utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:1;stroke:rgb(0,0,0)"/></svg>'/>
+    <van-button @click="show = !show">收起</van-button>
+    <div class="tzt-slide" :class="[show ? 'slider' : '']">
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+      <div>ppppppppppppppppp</div>
+    </div>
   </div>
 </template>
 
@@ -47,7 +73,8 @@
     name: "Container",
     data() {
       return {
-        arr: []
+        arr: [],
+        show: false,
       }
     },
     created() {
@@ -189,5 +216,19 @@
       text-align: left;
       background-color: blue;
     }
+  }
+  .tzt-slide {
+
+    overflow: hidden;
+    max-height: 0;
+    /*transition: max-height 3s linear;*/
+    transition: max-height .3s cubic-bezier(0, 1, 0, 1);
+  }
+  .slider {
+    max-height: 9999px;
+    transition-timing-function: cubic-bezier(0.5, 0, 1, 0);
+    transition-delay: 0s;
+    /*transition: max-height 3s linear;*/
+    /*transition-delay: 0s;*/
   }
 </style>

@@ -38,7 +38,7 @@
     </div>
     <input class="display-none" type="file" @change="uploadImg" id="uploadImg" name="image" accept="image/*">
     <label class="uploader-btn" for="uploadImg">上传图片</label>
-    <img width="100%" :src="imageSrc" alt="">
+    <img width="100%" :src="imageSrc" alt="" @click="downloadImage()">
     <!--<img width="100%" src="~assets/img/common/dlrb.jpg" alt="">-->
     <!--<img width="100%" :src=" dlrbImg" alt="">-->
     <test-data></test-data>
@@ -66,7 +66,7 @@
   import html2canvas from 'html2canvas';
   import _csv from '@/csv/csv';
   import _exportCsv from '@/csv/export-csv';
-  import {timeToDate} from "@/config/utils"
+  import {timeToDate, downloadImage} from "@/config/utils"
 
   export default {
     name: 'home',
@@ -135,6 +135,9 @@
       }
     },
     methods: {
+      downloadImage(img) {
+        downloadImage(img, 'name');
+      },
       changeObjFun() {
         // 对象添加新属性
         // this.objData.b = 'two'; // 视图不会刷新

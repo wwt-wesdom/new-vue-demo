@@ -1,9 +1,11 @@
 <template>
   <van-popup :value="value" @click-overlay="close">
-    <div class="border-radius-5 bc-fff pd-20">
-      <p>弹窗主体内容</p>
-      <button @click="close">close</button>
-    </div>
+    <slot>
+      <div class="border-radius-5 bc-fff pd-20">
+        <p>弹窗主体内容</p>
+        <button @click="close">close</button>
+      </div>
+    </slot>
   </van-popup>
 </template>
 
