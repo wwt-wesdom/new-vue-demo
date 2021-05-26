@@ -65,8 +65,8 @@ new Vue({
 
 const testNode = new Vue({
   render: h => h(TestVueComponent)
-});
-console.log(testNode.$el);
+}).$mount();
+// console.log(testNode.$el, 'testNode.$el');
 // document.body.appendChild(testNode.$el);
 
 

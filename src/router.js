@@ -210,6 +210,24 @@ export default new Router({
         showTabbar: false,
         needLogin: false,
       }
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: () => import(/* webpackChunkName: "about" */ './views/Test.vue'),
+      meta: {
+        showTabbar: false,
+        needLogin: false,
+      }
+    },
+    {
+      path: '/array-change',
+      name: 'arrayChange',
+      component: () => import('./views/ArrayChange.vue'),
+      meta: {
+        showTabbar: false,
+        needLogin: false,
+      }
     }
   ]
 })

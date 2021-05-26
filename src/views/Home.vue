@@ -1,62 +1,79 @@
-<template xmlns="http://www.w3.org/1999/html">
-  <div class="home pb-60">
-    <van-swipe :autoplay="3000">
-      <van-swipe-item v-for="(image, index) in images" :key="index">
-        <img alt="轮播图" :src="image" width="100%" height="200"/>
-      </van-swipe-item>
-    </van-swipe>
-    <section class="grid" @click="targetEle">
-      <div v-for="item in gridList" class="pd-10 grid-item" :data-item="JSON.stringify(item)">
-        <img src="~assets/img/common/dlrb.jpg" :data-item="JSON.stringify(item)" width="50" height="45" alt=""/>
-        <p :data-item="JSON.stringify(item)">{{ item.text }}</p>
-      </div>
-    </section>
-    <section class="img-grid">
-      <div class="img-item"></div>
-      <div class="img-item"></div>
-      <div class="img-item"></div>
-      <div class="img-item"></div>
-    </section>
-    <div id="anim"></div>
-    <button @click="toImageFun">生成图片</button>
-    <div @click="excelFun">导出excel</div>
-    <input type="checkbox" id="checkBox">
-    <label for="checkBox">label</label>
-    <section>
-      <img :src="dateUrl" alt="" width="50">
-    </section>
-    <canvas width="394" height="528" style="width: 197px; height: 264px;" ref="canvas"></canvas>
-    <section class="poster position-relative">
-      <div class="position-absolute date cl-fff">
-        <p class="fs-48">5</p>
-        <p class="mt-5 fs-16">2019.08</p>
-        <p class="mt-5 fs-16">星期一</p>
-      </div>
-    </section>
-    <div class="text-center">
-      <span class="inline-block tao" ref="canvasDom">涛</span>
-    </div>
-    <input class="display-none" type="file" @change="uploadImg" id="uploadImg" name="image" accept="image/*">
-    <label class="uploader-btn" for="uploadImg">上传图片</label>
-    <img width="100%" :src="imageSrc" alt="" @click="downloadImage()">
-    <!--<img width="100%" src="~assets/img/common/dlrb.jpg" alt="">-->
-    <!--<img width="100%" :src=" dlrbImg" alt="">-->
-    <test-data></test-data>
-    <!--<div>{{ this.globalData }}</div>-->
-    <div @click="changeObjFun">{{objData.a}}</div>
-    <div>{{objData.b}}</div>
-    <div @click="testPromise" class="bc-green cl-fff pd-15">promise</div>
-    <!--css动画-->
-    <div>
-      <div class="animation-box">
-        <ul class="animation" ref="aniList">
-          <li v-for="item in cssTextList" :key="item">{{item}}</li>
-        </ul>
-      </div>
-    </div>
-    <clock></clock>
-    <rotate></rotate>
-    <router-link to="/text-page">textPage</router-link>
+<template>
+  <div>
+    <!--<swipe :interval="2000">
+      <swiper-item v-for="(item, index) in images" :key="index">
+        <img alt="轮播图" :src="item" width="100%" height="200"/>
+      </swiper-item>
+    </swipe>-->
+    <swiper :interval="2000">
+      <swiper-item v-for="(item, index) in images" :key="index">
+        <img alt="轮播图" :src="item" width="100%" height="200"/>
+      </swiper-item>
+    </swiper>
+    <drop-down-refresh :on-refresh="onRefresh" :options="options">
+      <pull-up-reload :on-infinite-load="onInfiniteLoad"
+                      :parent-pull-up-state="infiniteLoadData.pullUpState">
+        <div class="home pb-60">
+          <img width="100%" src="~assets/img/common/dlrb.jpg" alt="">
+          <section class="grid" @click="targetEle">
+            <div v-for="item in gridList" class="pd-10 grid-item" :data-item="JSON.stringify(item)">
+              <img src="~assets/img/common/dlrb.jpg" :data-item="JSON.stringify(item)" width="50" height="45" alt=""/>
+              <p :data-item="JSON.stringify(item)">{{ item.text }}</p>
+            </div>
+          </section>
+          <section class="img-grid">
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+            <div class="img-item"></div>
+          </section>
+          <div>
+            <router-link to="/about">about</router-link>
+          </div>
+          <div id="anim"></div>
+          <button @click="toImageFun">生成图片</button>
+          <div @click="excelFun">导出excel</div>
+          <input type="checkbox" id="checkBox">
+          <label for="checkBox">label</label>
+          <section>
+            <img :src="dateUrl" alt="" width="50">
+          </section>
+          <canvas width="394" height="528" style="width: 197px; height: 264px;" ref="canvas"></canvas>
+          <section class="poster position-relative">
+            <div class="position-absolute date cl-fff">
+              <p class="fs-48">5</p>
+              <p class="mt-5 fs-16">2019.08</p>
+              <p class="mt-5 fs-16">星期一</p>
+            </div>
+          </section>
+          <div class="text-center">
+            <span class="inline-block tao" ref="canvasDom">涛</span>
+          </div>
+          <input class="display-none" type="file" @change="uploadImg" id="uploadImg" name="image" accept="image/*">
+          <label class="uploader-btn" for="uploadImg">上传图片</label>
+          <upload-img></upload-img>
+          <img width="100%" :src="imageSrc" alt="" @click="downloadImage()">
+          <!--<img width="100%" src="~assets/img/common/dlrb.jpg" alt="">-->
+
+          <test-data></test-data>
+          <!--<div>{{ this.globalData }}</div>-->
+          <div @click="changeObjFun">{{objData.a}}</div>
+          <div>{{objData.b}}</div>
+          <div @click="testPromise" class="bc-green cl-fff pd-15">promise</div>
+          <!--css动画-->
+          <div>
+            <div class="animation-box">
+              <ul class="animation" ref="aniList">
+                <li v-for="item in cssTextList" :key="item">{{item}}</li>
+              </ul>
+            </div>
+          </div>
+          <clock></clock>
+          <rotate></rotate>
+          <router-link to="/text-page">textPage</router-link>
+        </div>
+      </pull-up-reload>
+    </drop-down-refresh>
   </div>
 </template>
 
@@ -67,17 +84,22 @@
   import _csv from '@/csv/csv';
   import _exportCsv from '@/csv/export-csv';
   import {timeToDate, downloadImage} from "@/config/utils"
+  import PullUpReload from "../components/PullUpReload";
 
   export default {
     name: 'home',
     components: {
+      PullUpReload,
       vanSwipe: Swipe,
       vanSwipeItem: SwipeItem,
     },
     data() {
       return {
+        img: require('../assets/img/common/dlrb.jpg'),
         images: [
           'https://img.yzcdn.cn/vant/apple-1.jpg',
+          'https://img01.yzcdn.cn/vant/apple-1.jpg',
+          'https://img01.yzcdn.cn/vant/apple-2.jpg',
           'https://img.yzcdn.cn/vant/apple-2.jpg'
         ],
         gridList: [],
@@ -105,6 +127,17 @@
           a: 'one'
         },
         cssTextList: [],
+        options: {
+          downText: '下拉刷新'
+        },
+        // 上拉加载的设置
+        infiniteLoadData: {
+          initialShowNum: 3, // 初始显示多少条
+          everyLoadingNum: 3, // 每次加载的个数
+          pullUpState: 2, // 子组件的pullUpState状态
+          pullUpList: [], // 上拉加载更多数据的数组
+          showPullUpListLength: this.initialShowNum // 上拉加载后所展示的个数
+        }
       }
     },
     beforeCreate() {
@@ -112,6 +145,7 @@
       console.log(this.baseUrl);
     },
     created() {
+      // document.body.style.backgroundColor = '#000';
       const that = this;
       console.log(this.$parent.showTabbar);
       console.log(this.$children);
@@ -120,21 +154,29 @@
         // console.log(res);
       });
       let i = 14;
-      setInterval(()=>{
+      // 定时器在路由跳转后不会清除，需手动清除
+     /* this.interval = setInterval(()=>{
         i++;
+        console.log(i);
         // that.cssTextListPush(i);
-      },1000)
+      },1000)*/
     },
     computed: {
       getNumber() {
         return 100;
       }
     },
+    beforeDestroy() {
+      clearInterval(this.interval)
+    },
     mounted() {
       window.onscroll = () => {
       }
     },
     methods: {
+      onRefresh(done) {
+        done() // call done
+      },
       downloadImage(img) {
         downloadImage(img, 'name');
       },
@@ -327,6 +369,17 @@
         _exportCsv.download(`${timeToDate()}.csv`, downloadData, () => {
           console.log('批量导出订单成功！');
         })
+      },
+
+      getPullUpMoreData() {
+
+      },
+
+      onInfiniteLoad(done) {
+        if (this.infiniteLoadData.pullUpState === 1) {
+          this.getPullUpMoreData()
+        }
+        done()
       }
     }
   }

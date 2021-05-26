@@ -1,3 +1,4 @@
+/*
 import axios from '../config/api.request'
 
 
@@ -24,6 +25,7 @@ export default {
     })
   },
 
+
   updateCats() {
     return axios.request({
       method: axios.requestType.post,
@@ -31,3 +33,4 @@ export default {
     })
   }
 }
+*/

@@ -1,5 +1,4 @@
-import axios from '../config/api.request'
-
+import axios from '../config/axios'
 
 export default {
   getUserInfo () {
@@ -11,46 +10,24 @@ export default {
   },
 
   getBrandList() {
-    return axios.request({
-      url: 'commodity/get-brand-list',
-      method: axios.requestType.get
-    })
+    return axios.get('commodity/get-brand-list')
   },
 
   sendVerifyCode(data) {
-    return axios.request({
-      method: axios.requestType.post,
-      url: 'auth/send-verify-code',
-      data
-    })
+    return axios.post('auth/send-verify-code', data)
   },
 
   loginBySms(data) {
-    return axios.request({
-      method: axios.requestType.post,
-      url: 'auth/login-by-sms',
-      data
-    })
+    return axios.post('auth/login-by-sms', data)
   },
   getHello() {
-    return axios.request({
-      method: axios.requestType.get,
-      url: 'test/get-hello'
-    })
+    return axios.get('test/get-hello')
   },
   testPost(data) {
-    return axios.request({
-      method: axios.requestType.post,
-      url: 'test/test-post',
-      data
-    })
+    return axios.post('test/test-post', data)
   },
   readFile(data) {
-    return axios.request({
-      method: axios.requestType.post,
-      url: 'test/read-file',
-      data
-    })
+    return axios.get('test/read-file', data)
   }
 
 }
