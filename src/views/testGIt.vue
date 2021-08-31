@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    lasdfjklaslkdf
+  </div>
 </template>
 
 <script>
