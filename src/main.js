@@ -54,7 +54,7 @@ router.afterEach((to, from) => {
 })
 
 
-new Vue({
+const vue = new Vue({
   router,
   store,
   data: {
@@ -62,10 +62,11 @@ new Vue({
   },
   render: h => h(App)
 }).$mount('#app');
+console.log(vue);
 
 const testNode = new Vue({
   render: h => h(TestVueComponent)
-}).$mount();
+}).$mount('#appTow');
 // console.log(testNode.$el, 'testNode.$el');
 // document.body.appendChild(testNode.$el);
 
